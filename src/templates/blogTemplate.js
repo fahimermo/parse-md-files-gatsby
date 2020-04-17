@@ -40,8 +40,8 @@ export default function Template({
 }
 
 export const pageQuery = graphql`
-  query($permalink: String!) {
-    markdownRemark(frontmatter: { permalink: { eq: $permalink } }) {
+  query($path: String!) {
+    markdownRemark(frontmatter: { permalink: { eq: $path } }) {
       html
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
