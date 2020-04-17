@@ -6,6 +6,7 @@
 
 module.exports = {
   /* Your site config here */
+  pathPrefix: "/parse-md-files-gatsby",
   siteMetadata: {
     title: `MD Parser`,
     description: `MD Parser for Gatsby`,
