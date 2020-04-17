@@ -3,11 +3,23 @@ import Helmet from 'react-helmet';
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
+import div_element from './../shared/const';
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
+
+  const parser = (html_source) => {
+    // let result_html = html_source.replace(new RegExp(div_element.before_str, 'gi'), div_element.after_str);
+    let result_html = html_source.split(div_element.before_1).join(div_element.before_2);
+    result_html = result_html.split(div_element.after_1).join(div_element.after_2);
+    return result_html;
+  }
+
   return (
     <Layout>
       <Helmet>
@@ -31,8 +43,9 @@ export default function Template({
           )}
           <div
             className="blog-post-content"
-            dangerouslySetInnerHTML={{ __html: html }}
+            dangerouslySetInnerHTML={{ __html: parser(html) }}
           />
+          {/* { console.log(ReactHtmlParser(html)) } */}
         </article>
       </div>
     </Layout>
